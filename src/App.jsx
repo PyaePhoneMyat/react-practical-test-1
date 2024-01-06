@@ -1,10 +1,10 @@
-import './App.css';
-import { createContext, useEffect, useState } from 'react';
-import { MoleSlot } from './components';
-import StartButton from './base/StartButton';
-import Scoreboard from './base/Scoreboard';
-import Timeboard from './base/Timeboard';
-import ModeSelector from './base/ModeSelector';
+import "./App.css";
+import { createContext, useEffect, useState } from "react";
+import { MoleSlot } from "./components";
+import StartButton from "./base/StartButton";
+import Scoreboard from "./base/Scoreboard";
+import Timeboard from "./base/Timeboard";
+import ModeSelector from "./base/ModeSelector";
 
 export const ScoreContext = createContext({
   totalScore: 0,
@@ -12,13 +12,17 @@ export const ScoreContext = createContext({
 });
 
 function App() {
+  const scores = [3, 2, 3, 2, 3, 2, 3, 2, 3];
+
   const [started, setStarted] = useState(false);
   const [totalScore, setTotalScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
-  const [selectedMode, setSelectedMode] = useState('easy');
-  const gameTime = selectedMode === 'easy' ? 30 : 60;
+
+  const [selectedMode, setSelectedMode] = useState("easy");
+
+  const gameTime = selectedMode === "easy" ? 3 : 60;
+
   const [gameDuration, setGameDuration] = useState(gameTime);
-  const scores = [3, 2, 3, 2, 3, 2, 3, 2, 3];
 
   const startGame = () => {
     setStarted(true);
@@ -57,12 +61,8 @@ function App() {
     };
   }, [started]);
 
-  const easyMode = () => {
-    setSelectedMode('easy');
-  };
-
-  const hardMode = () => {
-    setSelectedMode('hard');
+  const changeMode = (mode) => {
+    setSelectedMode(mode);
   };
 
   return (
@@ -73,25 +73,17 @@ function App() {
           gainPoints: gainPoints,
         }}
       >
-        <ModeSelector
-          easyMode={easyMode}
-          hardMode={hardMode}
-          selectedMode={selectedMode}
-        />
-        <div className='Game__Interfaces pt-5 flex items-center justify-evenly'>
-          {!started && <StartButton handleClick={startGame} />}
-          {
-            <Scoreboard
-              totalScore={totalScore}
-              highScore={highScore}
-              selectedMode={selectedMode}
-            />
-          }
-          {started && <Timeboard time={gameDuration} />}
+        <ModeSelector changeMode={changeMode} selectedMode={selectedMode} />
+        <div className="Game__Interfaces pt-5 grid grid-cols-4 text-center">
+          <div className="col-span-1">{!started && <StartButton show={started} handleClick={startGame} />}</div>
+          <div className="col-span-2">
+            {<Scoreboard totalScore={totalScore} highScore={highScore} selectedMode={selectedMode} />}
+          </div>
+          <div className="col-span-1">{started && <Timeboard time={gameDuration} />}</div>
         </div>
-        <div className='Game__Area'>
+        <div className="Game__Area">
           {started && (
-            <div className='max-w-md grid grid-cols-3 grid-rows-3 gap-4 mt-20 mx-5 sm:mx-auto'>
+            <div className="max-w-md grid grid-cols-3 grid-rows-3 gap-4 mt-20 mx-5 sm:mx-auto">
               {scores.map((s, i) => (
                 <MoleSlot
                   key={i}
