@@ -1,19 +1,19 @@
-const ModeSelector = ({ easyMode, hardMode, selectedMode }) => {
+const ModeSelector = ({ changeMode, selectedMode }) => {
   return (
-    <div className='flex bg-pink-200 border-4 border-red-400 rounded-full py-2 items-center justify-center uppercase font-medium w-[90%] mt-2 mx-auto'>
-      <div className='text-2xl mr-3'>Mode : </div>
+    <div className="flex bg-pink-200 border-4 border-red-400 rounded-full py-2 items-center justify-center uppercase font-medium w-[90%] mt-2 mx-auto">
+      <div className="text-2xl mr-3">Mode : </div>
       <button
-        onClick={easyMode}
+        onClick={() => changeMode("easy")}
         className={`${
-          selectedMode === 'easy' ? 'bg-green-700' : 'bg-gray-300'
+          selectedMode === "easy" ? "bg-green-700" : "bg-gray-300"
         } text-white h-full inline-flex items-center mx-2 px-3 py-2`}
       >
         Easy
       </button>
       <button
-        onClick={hardMode}
+        onClick={() => changeMode("hard")}
         className={`${
-          selectedMode === 'hard' ? 'bg-green-700' : 'bg-gray-300'
+          selectedMode === "hard" ? "bg-green-700" : "bg-gray-300"
         } text-white h-full inline-flex items-center mx-2 px-3 py-2`}
       >
         Hard
