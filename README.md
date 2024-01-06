@@ -9,11 +9,11 @@ Please fork this repo and do the missions.
 > Your missions:
 
 - Fix: score counting
-- Fix: UI layout should not shift when start button disappears
+- Fix: UI layout should not shift when start button disappears ~
 - Fix: game timer should stop at zero and game should end
 - Fix: game timer should not show when game is not playing
 - Fix: user should not be able to click the same mole many times
-- Fix: setTimeout() memory leak
+- Fix: setTimeout() memory leak~
 
 ---
 
